@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { getArticleById } from "../../api";
 import Comments from "./Comments";
 import { FaUser } from "react-icons/fa";
-
+import Vote from "./Vote";
 
 
 function SingleArticle() {
@@ -36,12 +36,11 @@ function SingleArticle() {
 					<div className="flex items-center gap-2"><div><FaUser /></div><p>{singleArticle.author}</p></div>
           <p>Topic: {singleArticle.topic}</p>
           <p className="w-[500px]">{singleArticle.body}</p>
-          <p>{singleArticle.votes} votes</p>
           <p>Article date: {formattedData}</p>
         </div>
       </div>
-
-      <Comments singleArticle={singleArticle} formattedData={formattedData}/>
+      <Vote singleArticle={singleArticle} article_id={article_id} />
+      <Comments article_id={article_id} singleArticle={singleArticle} formattedData={formattedData}/>
     </>
   );
 }

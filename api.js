@@ -27,8 +27,20 @@ function getComments(article_id) {
     })
 }
 
+function upVote(article_id) {
+    return axios.patch(`https://news-project-1.onrender.com/api/articles/${article_id}`, { inc_votes: 1 }).then((response) => {
+        return response.data.article.votes
+    })
+}
+
+function downVote(article_id) {
+    return axios.patch(`https://news-project-1.onrender.com/api/articles/${article_id}`, { inc_votes: -1 }).then((response) => {
+        return response.data.article.votes
+    })
+}
 
 
 
 
-export {getAllArticles, getArticleById, getComments}
+
+export {getAllArticles, getArticleById, getComments, upVote, downVote}
