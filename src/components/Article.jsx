@@ -14,7 +14,7 @@ function Article({articles}) {
 						<div className="flex flex-col gap-5 pl-10 pt-5">
 						<div className="flex items-center gap-2"><div><FaUser /></div><p>{article.author}</p></div>
 							<p>Topic: {article.topic}</p>
-							<p>{article.votes} votes</p>
+							<p>{article.votes} Likes</p>
 							<p>{article.comment_count} comments</p>
 							<p>Article date: {article.created_at.slice(0,19).replace("T", " ")}</p>
 						</div>

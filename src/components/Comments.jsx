@@ -2,16 +2,20 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getComments } from "../../api";
 
-function Comments({singleArticle, formattedData}) {
+function Comments({article_id, singleArticle, formattedData}) {
   const [comments, setComments] = useState([]);
-  const { article_id } = useParams();
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     getComments(article_id).then((data) => {
       setComments(data);
+      setLoading(false)
     });
   }, [article_id]);
 
+  if (loading) {
+    return <h1>Loading...</h1>
+  }
 
   return comments===undefined ? (
     <h1>No comments found</h1>
