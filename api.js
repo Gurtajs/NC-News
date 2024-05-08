@@ -17,4 +17,18 @@ function getArticleById(article_id) {
         console.log(error)
     })
 }
-export {getAllArticles, getArticleById}
+
+function getComments(article_id) {
+    return axios.get(`https://news-project-1.onrender.com/api/articles/${article_id}/comments`).then((response) => {
+        return response.data.comments
+    })
+    .catch((error) => {
+        console.log(error)
+    })
+}
+
+
+
+
+
+export {getAllArticles, getArticleById, getComments}
