@@ -65,6 +65,11 @@ function postComment(article_id, username, body) {
       })
 }
 
+function deleteComment(comment_id) {
+  return axios.delete(`https://news-project-1.onrender.com/api/comments/${comment_id}`)
+}
+
+
 export {
   getAllArticles,
   getArticleById,
@@ -72,4 +77,5 @@ export {
   upVote,
   downVote,
   postComment,
+  deleteComment,
 };
