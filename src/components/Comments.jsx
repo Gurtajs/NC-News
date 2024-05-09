@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getComments } from "../../api";
+import PostComment from "./PostComment";
+
 
 function Comments({article_id, singleArticle, formattedData}) {
   const [comments, setComments] = useState([]);
@@ -17,11 +19,15 @@ function Comments({article_id, singleArticle, formattedData}) {
     return <h1>Loading...</h1>
   }
 
+  
   return comments===undefined ? (
     <h1>No comments found</h1>
    ) : (
       <>
-      <h1 className="pt-5">{singleArticle.comment_count} Comments</h1>
+      <div className="flex items-center gap-10 pt-2">
+      
+      </div>
+      <PostComment article_id={article_id} formattedData={formattedData} comments={comments} setComments={setComments} singleArticle={singleArticle}/>
       {comments.map((comment) => {
         return (
           <div className="pt-10" key={comment.comment_id}>
@@ -29,7 +35,7 @@ function Comments({article_id, singleArticle, formattedData}) {
             <p className="font-bold">{comment.author}</p>
             <p>{comment.body}</p>
             <p>{comment.votes} votes</p>
-            <p>{formattedData}</p>
+            <p>{comment.created_at.slice(0,19).replace("T", " ")}</p>
           </div>
           </div>
         );
