@@ -40,7 +40,7 @@ function SingleArticle() {
         </div>
       </div>
       <Vote singleArticle={singleArticle} article_id={article_id} />
-      <Comments article_id={article_id} singleArticle={singleArticle} formattedData={formattedData}/>
+      <Comments article_id={article_id} singleArticle={singleArticle}/>
     </>
   );
 }
