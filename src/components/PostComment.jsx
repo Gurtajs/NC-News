@@ -2,18 +2,20 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { getComments, postComment } from "../../api";
 
-function PostComment({ article_id, formattedData, singleArticle }) {
-  const [comment, setComment] = useState([]);
+
+
+function PostComment({ article_id, commentCount, setCommentCount, setDeleted }) {
+  const [commentsArray, setCommentsArray] = useState([]);
   const [form, setForm] = useState(false);
   const [username, setUsername] = useState("");
   const [body, setBody] = useState("");
-  const [commentCount, setCommentCount] = useState(singleArticle.comment_count);
   const [posting, setPosting] = useState(false);
   const [posted, setPosted] = useState("")
 
   const showForm = () => {
     setForm(!form);
     setPosted("")
+    setDeleted(false)
   };
 
   const handleSubmit = (e) => {
@@ -22,7 +24,7 @@ function PostComment({ article_id, formattedData, singleArticle }) {
     setPosting(true);
     postComment(article_id, username, body).then((data) => {
       setForm(!form);
-      setComment([data, ...comment]);
+      setCommentsArray([data, ...commentsArray]);
       setPosting(false);
       setPosted("Comment Posted")
       setUsername("");
@@ -34,7 +36,6 @@ function PostComment({ article_id, formattedData, singleArticle }) {
 
   return (
     <div>
-      <h1>{commentCount} Comments</h1>
       <button
         className="border-2 border-black rounded-lg p-1"
         onClick={showForm}
@@ -66,7 +67,7 @@ function PostComment({ article_id, formattedData, singleArticle }) {
         </form>
       ) : null}
 
-      {comment.map((comm) => {
+      {commentsArray.map((comm) => {
         return (
           <div className="pt-10" key={comm.comment_id}>
             <div className="flex flex-col gap-2 p-2 max-w-5xl border-2 border-black border-solid rounded">
@@ -75,6 +76,8 @@ function PostComment({ article_id, formattedData, singleArticle }) {
               <p>{comm.votes} votes</p>
               <p>{comm.created_at.slice(0,19).replace("T", " ")}</p>
             </div>
+
+  
           </div>
         );
       })}
