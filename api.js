@@ -78,7 +78,7 @@ function getTopics() {
   });
 }
 
-function getArtibleByTopic(topic) {
+function getArticleByTopic(topic) {
   return axios.get(`https://news-project-1.onrender.com/api/articles?topic=${topic}`).then((response) => {
     return response.data.articles
   })
@@ -86,6 +86,18 @@ function getArtibleByTopic(topic) {
     console.log(error);
   });
 }
+
+function sortArticles(sortBy, orderBy) {
+  return axios.get(`https://news-project-1.onrender.com/api/articles?sort_by=${sortBy}&order_by=${orderBy}`).then((response) => {
+    return response.data.articles
+  })
+  .catch((error) => {
+    console.log(error)
+  })
+}
+
+
+
 
 export {
   getAllArticles,
@@ -96,5 +108,6 @@ export {
   postComment,
   deleteComment,
   getTopics,
-  getArtibleByTopic
+  getArticleByTopic,
+  sortArticles
 };
