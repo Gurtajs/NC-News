@@ -69,6 +69,23 @@ function deleteComment(comment_id) {
   return axios.delete(`https://news-project-1.onrender.com/api/comments/${comment_id}`)
 }
 
+function getTopics() {
+  return axios.get(`https://news-project-1.onrender.com/api/topics`).then((response) => {
+    return response.data.topics
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+}
+
+function getArtibleByTopic(topic) {
+  return axios.get(`https://news-project-1.onrender.com/api/articles?topic=${topic}`).then((response) => {
+    return response.data.articles
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+}
 
 export {
   getAllArticles,
@@ -78,4 +95,6 @@ export {
   downVote,
   postComment,
   deleteComment,
+  getTopics,
+  getArtibleByTopic
 };
