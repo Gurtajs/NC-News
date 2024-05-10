@@ -2,34 +2,48 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { getComments, postComment } from "../../api";
 
-
-
-function PostComment({ article_id, commentCount, setCommentCount, setDeleted }) {
+function PostComment({
+  article_id,
+  commentCount,
+  setCommentCount,
+  setDeleted,
+}) {
   const [commentsArray, setCommentsArray] = useState([]);
   const [form, setForm] = useState(false);
   const [username, setUsername] = useState("");
   const [body, setBody] = useState("");
   const [posting, setPosting] = useState(false);
-  const [posted, setPosted] = useState("")
+  const [posted, setPosted] = useState("");
+  const [error, setError] = useState("");
 
   const showForm = () => {
+    setError("");
     setForm(!form);
-    setPosted("")
-    setDeleted(false)
+    setPosted("");
+    setDeleted(false);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setCommentCount(commentCount + 1);
-    setPosting(true);
-    postComment(article_id, username, body).then((data) => {
-      setForm(!form);
-      setCommentsArray([data, ...commentsArray]);
-      setPosting(false);
-      setPosted("Comment Posted")
-      setUsername("");
-      setBody("");
-    });
+    if (username.length === 0 && body.length === 0) {
+      setError("Username and Comment cannot be blank");
+    } else if (username.length === 0) {
+      setError("Enter a username");
+    } else if (body.length === 0) {
+      setError("Enter a comment");
+    } else {
+      setError("");
+      setCommentCount(commentCount + 1);
+      setPosting(true);
+      postComment(article_id, username, body).then((data) => {
+        setForm(!form);
+        setCommentsArray([data, ...commentsArray]);
+        setPosting(false);
+        setPosted("Comment Posted");
+        setUsername("");
+        setBody("");
+      });
+    }
   };
 
   if (posting) return <h1>Posting...</h1>;
@@ -51,7 +65,9 @@ function PostComment({ article_id, commentCount, setCommentCount, setDeleted }) 
             type="text"
             placeholder="author name"
             value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e) => {
+              setUsername(e.target.value);
+            }}
           />
 
           <label htmlFor="body">Comment</label>
@@ -66,7 +82,7 @@ function PostComment({ article_id, commentCount, setCommentCount, setDeleted }) 
           <input type="submit" onClick={handleSubmit} />
         </form>
       ) : null}
-
+      {error && <p>{error}</p>}
       {commentsArray.map((comm) => {
         return (
           <div className="pt-10" key={comm.comment_id}>
@@ -74,10 +90,8 @@ function PostComment({ article_id, commentCount, setCommentCount, setDeleted }) 
               <p className="font-bold">{comm.author}</p>
               <p>{comm.body}</p>
               <p>{comm.votes} votes</p>
-              <p>{comm.created_at.slice(0,19).replace("T", " ")}</p>
+              <p>{comm.created_at.slice(0, 19).replace("T", " ")}</p>
             </div>
-
-  
           </div>
         );
       })}

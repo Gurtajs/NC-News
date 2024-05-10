@@ -4,7 +4,7 @@ import { getComments } from "../../api";
 import PostComment from "./PostComment";
 import { deleteComment } from "../../api";
 
-function Comments({ article_id, singleArticle, formattedData }) {
+function Comments({ article_id, singleArticle }) {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [commentCount, setCommentCount] = useState(singleArticle.comment_count);
@@ -56,7 +56,6 @@ function Comments({ article_id, singleArticle, formattedData }) {
                       (comments) => comments.comment_id !== comment.comment_id
                     )
                   );
-                  
                 }}
               >
                 Delete comment
