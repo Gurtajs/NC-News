@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { sortArticles } from "../../api";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function SortArticles({ setArticles }) {
   const [selectedSortBy, setSelectedSortBy] = useState("created_at");
@@ -12,9 +12,9 @@ function SortArticles({ setArticles }) {
     sortArticles(selectedSortBy, selectedOrderBy).then((data) => {
       setArticles(data);
     });
-		const newParams = new URLSearchParams();
+    const newParams = new URLSearchParams();
     newParams.set("sortby", selectedSortBy);
-		newParams.set("orderby", selectedOrderBy);
+    newParams.set("orderby", selectedOrderBy);
     navigate(`?${newParams.toString()}`);
   }, [selectedSortBy, selectedOrderBy]);
 
@@ -28,8 +28,8 @@ function SortArticles({ setArticles }) {
           value={selectedSortBy}
           onChange={(e) => setSelectedSortBy(e.target.value)}
         >
-         <option value="created_at">Date</option>
-         <option value="comment_count">Comment count</option>
+          <option value="created_at">Date</option>
+          <option value="comment_count">Comment count</option>
           <option value="votes">Votes</option>
         </select>
       </label>

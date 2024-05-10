@@ -27,7 +27,7 @@ function Home() {
   return (
     <section>
       <h1 className="pt-10 text-3xl">Available articles</h1>
-      <SortArticles articles={articles} setArticles={setArticles}/>
+      <SortArticles articles={articles} setArticles={setArticles} />
       <Topics />
       <Article articles={articles} />
     </section>

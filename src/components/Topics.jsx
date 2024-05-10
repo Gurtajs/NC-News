@@ -1,29 +1,33 @@
 import { useSearchParams, Link } from "react-router-dom";
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from "react";
 import { getTopics } from "../../api";
 
 
 function Topics() {
+  const [topics, setTopics] = useState([]);
   
-    const [topics, setTopics] = useState([]);
 
-   
+  useEffect(() => {
+    getTopics().then((data) => {
+      setTopics(data);
+    })
+  }, []);
 
-    useEffect(() => {
-      getTopics().then((data) => {
-        setTopics(data);
-      });
-    }, []);
-
-    return (
-        <>
-        <h1 className="mt-5">View by topic:</h1>
-        <div className="flex gap-10">
+  
+  return (
+    <>
+      <h1 className="mt-5">View by topic:</h1>
+      <div className="flex gap-10">
         {topics.map((topic) => {
           return (
-            <div className="border-2 border-black rounded-md p-2" key={topic.slug}>
+            <div
+              className="border-2 border-black rounded-md p-2"
+              key={topic.slug}
+            >
               <Link to={`/article/topic/${topic.slug}`}>
-                <p className="font-bold" >{topic.slug[0].toUpperCase()+topic.slug.slice(1)}</p>
+                <p className="font-bold">
+                  {topic.slug[0].toUpperCase() + topic.slug.slice(1)}
+                </p>
                 <p>{topic.description}</p>
               </Link>
             </div>
@@ -33,8 +37,8 @@ function Topics() {
         <button className="border-2 border-black rounded-md">Coding</button>
         <button className="border-2 border-black rounded-md">Football</button> */}
       </div>
-      </>
-    )
+    </>
+  );
 }
 
-export default Topics
+export default Topics;
