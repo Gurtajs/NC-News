@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useEffect } from "react"
-import { getArtibleByTopic } from "../../api"
+import { getArticleByTopic } from "../../api"
 import { useParams } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 
@@ -11,9 +11,8 @@ const [articlesByTopic, setArticlesByTopic] = useState([])
 const {topic} = useParams()
 
 	useEffect(() => {
-		getArtibleByTopic(topic).then((data) => {
+		getArticleByTopic(topic).then((data) => {
 			setArticlesByTopic(data)
-			console.log(data)
 		})
 	}, [])
 
