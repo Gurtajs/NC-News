@@ -61,7 +61,7 @@ function PostComment({
       {posted}
       {form ? (
         <form>
-          <label htmlFor="author">Author</label>
+          <label className= "mr-2" htmlFor="author">Author</label>
           <input
             id="username"
             type="text"
@@ -72,7 +72,7 @@ function PostComment({
             }}
           />
 
-          <label htmlFor="body">Comment</label>
+          <label className= "mr-2" htmlFor="body">Comment</label>
           <input
             id="body"
             type="text"
@@ -81,7 +81,7 @@ function PostComment({
             onChange={(e) => setBody(e.target.value)}
           />
 
-          <input type="submit" onClick={handleSubmit} />
+          <input className= "border-2 border-black rounded-md p-1" type="submit" onClick={handleSubmit} />
         </form>
       ) : null}
      

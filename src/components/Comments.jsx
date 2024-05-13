@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { getComments } from "../../api";
 import PostComment from "./PostComment";
 import { deleteComment } from "../../api";
@@ -27,9 +26,7 @@ function Comments({ article_id, singleArticle }) {
     <h1>No comments found</h1>
   ) : (
     <>
-      <div className="flex items-center gap-10 pt-2">
-        <h1>{commentCount} Comments</h1>
-      </div>
+      <h1>{commentCount} Comments</h1>
       <PostComment
         article_id={article_id}
         commentCount={commentCount}
@@ -42,7 +39,7 @@ function Comments({ article_id, singleArticle }) {
       {comments.map((comment) => {
         return (
           <div className="pt-10" key={comment.comment_id}>
-            <div className="flex flex-col gap-2 p-2 max-w-5xl border-2 border-black border-solid rounded">
+            <div className="flex flex-col gap-2 p-2 max-w-5xl border-2 border-black border-solid rounded max-w-[900px]">
               <p className="font-bold">{comment.author}</p>
               <p>{comment.body}</p>
               <p>{comment.votes} votes</p>
