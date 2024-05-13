@@ -1,14 +1,16 @@
-import { useEffect } from "react";
 import { useState } from "react";
-import { getComments, postComment } from "../../api";
+import { postComment } from "../../api";
+
 
 function PostComment({
   article_id,
   commentCount,
   setCommentCount,
   setDeleted,
+  setComments,
+  comments
 }) {
-  const [commentsArray, setCommentsArray] = useState([]);
+
   const [form, setForm] = useState(false);
   const [username, setUsername] = useState("");
   const [body, setBody] = useState("");
@@ -37,7 +39,7 @@ function PostComment({
       setPosting(true);
       postComment(article_id, username, body).then((data) => {
         setForm(!form);
-        setCommentsArray([data, ...commentsArray]);
+        setComments([data, ...comments])
         setPosting(false);
         setPosted("Comment Posted");
         setUsername("");
@@ -47,7 +49,7 @@ function PostComment({
   };
 
   if (posting) return <h1>Posting...</h1>;
-
+  
   return (
     <div>
       <button
@@ -82,20 +84,10 @@ function PostComment({
           <input type="submit" onClick={handleSubmit} />
         </form>
       ) : null}
+     
       {error && <p>{error}</p>}
-      {commentsArray.map((comm) => {
-        return (
-          <div className="pt-10" key={comm.comment_id}>
-            <div className="flex flex-col gap-2 p-2 max-w-5xl border-2 border-black border-solid rounded">
-              <p className="font-bold">{comm.author}</p>
-              <p>{comm.body}</p>
-              <p>{comm.votes} votes</p>
-              <p>{comm.created_at.slice(0, 19).replace("T", " ")}</p>
-            </div>
-          </div>
-        );
-      })}
     </div>
+    
   );
 }
 

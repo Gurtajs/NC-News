@@ -6,12 +6,20 @@ import Home from './components/Home'
 import SingleArticle from './components/SingleArticle'
 import ArticleByTopic from './components/ArticleByTopic'
 import ErrorPage from './components/ErrorPage'
+import User from './components/User'
 
 function App() {
 
   return (
     <div className='pl-5'>
+      <div className='flex gap-[350px]'>
+      <div>
       <Header/>
+      </div>
+      <div className='flex items-center'>
+      <User/>
+      </div>
+      </div>
       <Routes>
       <Route path="*" element={<ErrorPage/>}/>
       <Route path="/" element={<Home/>} />

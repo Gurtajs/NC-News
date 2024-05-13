@@ -9,6 +9,7 @@ function Comments({ article_id, singleArticle }) {
   const [loading, setLoading] = useState(true);
   const [commentCount, setCommentCount] = useState(singleArticle.comment_count);
   const [deleted, setDeleted] = useState(false);
+  const [showDeletedMessage, setShowDeletedMessage] = useState(false)
 
   useEffect(() => {
     getComments(article_id).then((data) => {
@@ -16,6 +17,7 @@ function Comments({ article_id, singleArticle }) {
       setLoading(false);
     });
   }, [article_id]);
+
 
   if (loading) {
     return <h1>Loading...</h1>;
@@ -33,8 +35,10 @@ function Comments({ article_id, singleArticle }) {
         commentCount={commentCount}
         setCommentCount={setCommentCount}
         setDeleted={setDeleted}
+        setComments={setComments}
+        comments={comments}
       />
-      {deleted ? <h1>Comment deleted...</h1> : null}
+      {showDeletedMessage ? <h1>Comment deleted...</h1> : null}
       {comments.map((comment) => {
         return (
           <div className="pt-10" key={comment.comment_id}>
@@ -44,16 +48,18 @@ function Comments({ article_id, singleArticle }) {
               <p>{comment.votes} votes</p>
               <p>{comment.created_at.slice(0, 19).replace("T", " ")}</p>
             </div>
-
             {comment.author === "grumpy19" ? (
               <button
                 onClick={() => {
-                  setDeleted(true);
+                  setShowDeletedMessage(true)
+                  setTimeout(() => {
+                    setShowDeletedMessage(false)
+                  }, 1500)
                   setCommentCount(commentCount - 1);
                   deleteComment(comment.comment_id);
                   setComments(
                     comments.filter(
-                      (comments) => comments.comment_id !== comment.comment_id
+                      (singleComment) => singleComment.comment_id !== comment.comment_id
                     )
                   );
                 }}
