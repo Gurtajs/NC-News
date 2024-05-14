@@ -32,6 +32,7 @@ function Vote({ singleArticle, article_id }) {
       </div>
       {err ? <p>{err}</p> : null}
       <h1>{vote} Likes</h1>
+
     </>
   );
 }

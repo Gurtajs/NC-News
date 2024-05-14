@@ -19,12 +19,12 @@ function SingleArticle() {
         setLoading(false);
       })
       .catch(() => {
-        setError('Article not found');
+        setError("Article not found");
       });
   }, [article_id]);
 
   if (error) {
-    return <ErrorPage errorMessage={error}/>
+    return <ErrorPage errorMessage={error} />;
   }
 
   if (loading) {
@@ -35,7 +35,7 @@ function SingleArticle() {
 
   return (
     <>
-      <h2 className="font-bold inline-break break-all w-100">
+      <h2 className="font-bold w-100">
         {singleArticle.title}
       </h2>
       <div className="flex">

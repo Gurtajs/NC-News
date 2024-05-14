@@ -84,6 +84,11 @@ function sortArticles(sortBy, orderBy) {
   })
 }
 
+function getUser() {
+  return axios.get(`https://news-project-1.onrender.com/api/users`).then((response) => {
+    return response.data.users
+  })
+}
 
 
 
@@ -97,5 +102,6 @@ export {
   deleteComment,
   getTopics,
   getArticleByTopic,
-  sortArticles
+  sortArticles,
+  getUser
 };
