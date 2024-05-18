@@ -19,7 +19,7 @@ function User() {
 
   return (
     <>
-      <h1 className="mr-1">Logged in as:</h1>
+      <h1 className="mr-1">User:</h1>
       <p> {filteredUser[0].username}</p>
       <img className="border-2 border-black ml-2 mt-2 rounded-md"
         src={filteredUser[0].avatar_url}

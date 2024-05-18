@@ -3,8 +3,9 @@ import { useParams } from "react-router-dom";
 import { getArticleById } from "../../api";
 import Comments from "./Comments";
 import { FaUser } from "react-icons/fa";
-import Vote from "./Vote";
+import Vote from "./ArticleVote";
 import ErrorPage from "./ErrorPage";
+
 
 function SingleArticle() {
   const [singleArticle, setSingleArticle] = useState({});
@@ -42,8 +43,8 @@ function SingleArticle() {
         <img
           src={singleArticle.article_img_url}
           alt="article image"
-          width="300px"
-          height="200px"
+          className="max-w-[25%] max-h-[30%]"
+         
         />
         <div className="flex flex-col gap-5 pl-10 pt-5">
           <div className="flex items-center gap-2">
@@ -53,12 +54,13 @@ function SingleArticle() {
             <p>{singleArticle.author}</p>
           </div>
           <p>Topic: {singleArticle.topic}</p>
-          <p className="w-[500px]">{singleArticle.body}</p>
+          <p className="max-w-[500px]">{singleArticle.body}</p>
           <p>Article date: {formattedData}</p>
         </div>
       </div>
       <Vote singleArticle={singleArticle} article_id={article_id} />
       <Comments article_id={article_id} singleArticle={singleArticle} />
+
     </>
   );
 }

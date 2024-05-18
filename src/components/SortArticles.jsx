@@ -19,11 +19,12 @@ function SortArticles({ setArticles }) {
   }, [selectedSortBy, selectedOrderBy]);
 
   return (
-    <div className="flex">
+    <div className="flex gap-[50px]">
       <label htmlFor="sortby">
         Sort By:
         <select
           id="sortby"
+          className="border-2 border-gray-500 rounded-md ml-1"
           name="sortby"
           value={selectedSortBy}
           onChange={(e) => setSelectedSortBy(e.target.value)}
@@ -38,6 +39,7 @@ function SortArticles({ setArticles }) {
         Order By:
         <select
           id="orderby"
+          className="border-2 border-gray-500 rounded-md ml-1"
           name="orderby"
           value={selectedOrderBy}
           onChange={(e) => setSelectedOrderby(e.target.value)}

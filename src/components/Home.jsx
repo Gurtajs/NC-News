@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { getAllArticles, getTopics } from "../../api";
 import Article from "./Article";
 import Topics from "./Topics";
 import SortArticles from "./SortArticles";
+import PostArticle from "./PostArticle";
 
 function Home() {
   const [articles, setArticles] = useState([]);
@@ -26,9 +26,10 @@ function Home() {
 
   return (
     <section>
-      <h1 className="pt-10 text-3xl">Available articles</h1>
+      <h1 className="pt-5 pb-3 text-3xl">Available articles</h1>
       <SortArticles articles={articles} setArticles={setArticles} />
       <Topics />
+      <PostArticle articles={articles} setArticles={setArticles}/>
       <Article articles={articles} />
     </section>
   );

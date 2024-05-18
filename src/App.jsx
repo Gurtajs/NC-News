@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
@@ -12,7 +12,7 @@ function App() {
   return (
     <div className="pl-5">
       <div className="flex">
-        <div className="mr-[100px]">
+        <div className="mr-[300px]">
           <Header />
         </div>
         <div className="flex items-center mr-[100px]">

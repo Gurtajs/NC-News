@@ -1,12 +1,14 @@
 import { Link } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 
+
 function Article({ articles }) {
   return (
+    <>
     <ol>
-      {articles.map((article) => {
+      {articles.map((article, index) => {
         return (
-            <li className="mt-10 max-w-[650px] max-h-[290px]" key={article.article_id}>
+            <li className={index===0 ? "mt-5 max-w-[650px] max-h-[290px]" : "mt-10 max-w-[650px] max-h-[290px]"} key={article.article_id}>
               <Link to={`article/${article.article_id}`} >
               <h2 className="font-bold">
                 {article.title}
@@ -38,6 +40,7 @@ function Article({ articles }) {
         );
       })}
     </ol>
+    </>
   );
 }
 

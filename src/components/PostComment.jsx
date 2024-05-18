@@ -53,7 +53,7 @@ function PostComment({
   return (
     <div>
       <button
-        className="border-2 border-black rounded-lg p-1"
+        className="border-2 border-black rounded-lg p-1 translate-y-[-10px]"
         onClick={showForm}
       >
         Post Comment
@@ -81,7 +81,7 @@ function PostComment({
             onChange={(e) => setBody(e.target.value)}
           />
 
-          <input className= "border-2 border-black rounded-md p-1" type="submit" onClick={handleSubmit} />
+          <input className= "border-2 border-black rounded-md p-1 cursor-pointer" type="submit" onClick={handleSubmit} />
         </form>
       ) : null}
      
