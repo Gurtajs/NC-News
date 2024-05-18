@@ -2,7 +2,7 @@
 
 # Introduction
 
-Created a full stack news app that replicates the functionalities found in a social news platform such as Reddit, Available to view at https://nc-cool-news.netlify.app
+Created a full stack news app that replicates the functionalities found in a social news platform such as Reddit. Available to view at https://nc-cool-news.netlify.app (the website takes time to load as the api needs to wake up, your patience is appreciated 😊)
 
 # Overview
 
