@@ -94,7 +94,6 @@ function postArticle(author, title, body, topic, article_img_url) {
   return axios.post(`https://news-project-1.onrender.com/api/articles`, {
     author, title, body, topic, article_img_url
   }).then((response) => {
-    console.log(response)
     return response.data.article
   })
 }
@@ -111,6 +110,15 @@ function downvoteComment(comment_id) {
   })
 }
 
+function deleteArticle(article_id) {
+  return axios.delete(`https://news-project-1.onrender.com/api/articles/${article_id}`)
+}
+
+function getSortedByTopic(topic, sortBy, orderBy) {
+  return axios.get(`https://news-project-1.onrender.com/api/articles?topic=${topic}&sort_by=${sortBy}&order_by=${orderBy}`).then((response) => {
+  return response.data.articles
+  })
+}
 
 
 export {
@@ -127,5 +135,7 @@ export {
   getUser,
   postArticle, 
   upvoteComment, 
-  downvoteComment
+  downvoteComment,
+  deleteArticle,
+  getSortedByTopic
 };

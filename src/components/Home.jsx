@@ -1,36 +1,29 @@
-import { useState, useEffect } from "react";
-import { getAllArticles, getTopics } from "../../api";
-import Article from "./Article";
+import Article from "./Articles";
 import Topics from "./Topics";
-import SortArticles from "./SortArticles";
+import SortArticles from "./SortAllArticles";
 import PostArticle from "./PostArticle";
 
-function Home() {
-  const [articles, setArticles] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    getAllArticles().then((data) => {
-      setArticles(data);
-      setLoading(false);
-    });
-  }, []);
-
+function Home({ articles, setArticles, loading }) {
   if (loading) {
     return (
       <>
-        <h2>Loading...</h2>
+        <h2 className="pl-20">
+          The articles are loading, thank you for your patience!
+        </h2>
       </>
     );
   }
 
   return (
     <section>
-      <h1 className="pt-5 pb-3 text-3xl">Available articles</h1>
-      <SortArticles articles={articles} setArticles={setArticles} />
-      <Topics />
-      <PostArticle articles={articles} setArticles={setArticles}/>
-      <Article articles={articles} />
+      <div className="ml-0 md:ml-20">
+        <SortArticles articles={articles} setArticles={setArticles} />
+        <Topics />
+        <PostArticle articles={articles} setArticles={setArticles} />
+      </div>
+      <div className="flex justify-center ">
+      <Article articles={articles} setArticles={setArticles} />
+      </div>
     </section>
   );
 }

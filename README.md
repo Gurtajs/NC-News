@@ -14,6 +14,7 @@ This news application combined the news back-end api (found at https://github.co
 - Like articles 
 - Order articles by ascending or descending sorting by date posted, number of comments or votes
 I have dealt with error handling when the user searches for a non-existing path, article or topic an appropriate error message is displayed. The form to post the comment is also validated ensuring that the user does not post bad data.
+- Delete articles
 
 # Set up instructions
 

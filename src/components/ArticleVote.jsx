@@ -26,13 +26,20 @@ function Vote({ singleArticle, article_id }) {
 
   return (
     <>
-      <div className="flex gap-10 pt-3 pb-1">
-        <FaThumbsUp size={25} onClick={handleClickUp} className="cursor-pointer"/>
-        <FaThumbsDown size={25} onClick={handleClickDown} className="cursor-pointer"/>
+      <div className="flex gap-5 pt-3 pb-1">
+        <FaThumbsUp
+          size={25}
+          onClick={handleClickUp}
+          className="cursor-pointer"
+        />
+        <FaThumbsDown
+          size={25}
+          onClick={handleClickDown}
+          className="cursor-pointer"
+        />
       </div>
       {err ? <p>{err}</p> : null}
       <h1 className="pt-2">{vote} Likes</h1>
-
     </>
   );
 }

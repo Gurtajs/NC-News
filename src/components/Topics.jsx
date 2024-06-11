@@ -16,15 +16,15 @@ function Topics() {
   
   return (
     <>
-      <h1 className="mt-5 pb-2">View articles by topic:</h1>
+      <h1 className="mt-7 pb-3">View articles by topic:</h1>
       <div className="flex gap-10">
         {topics.map((topic) => {
           return (
             <div
-              className="border-2 border-black rounded-md p-2 mr-2 mb-10"
+              className="border-2 border-black rounded-md p-2 mr-2 mb-7"
               key={topic.slug}
             >
-              <Link to={`/article/topic/${topic.slug}`}>
+              <Link to={`/articles/topic/${topic.slug}`}>
                 <p className="font-bold">
                   {topic.slug[0].toUpperCase() + topic.slug.slice(1)}
                 </p>

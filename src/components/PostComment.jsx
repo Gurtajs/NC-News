@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { postComment } from "../../api";
 
-
 function PostComment({
   article_id,
   commentCount,
@@ -12,7 +11,7 @@ function PostComment({
 }) {
 
   const [form, setForm] = useState(false);
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState("tickle122");
   const [body, setBody] = useState("");
   const [posting, setPosting] = useState(false);
   const [posted, setPosted] = useState("");
@@ -27,11 +26,7 @@ function PostComment({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (username.length === 0 && body.length === 0) {
-      setError("Username and Comment cannot be blank");
-    } else if (username.length === 0) {
-      setError("Enter a username");
-    } else if (body.length === 0) {
+    if (body.length === 0) {
       setError("Enter a comment");
     } else {
       setError("");
@@ -42,7 +37,6 @@ function PostComment({
         setComments([data, ...comments])
         setPosting(false);
         setPosted("Comment Posted");
-        setUsername("");
         setBody("");
       });
     }
@@ -52,35 +46,28 @@ function PostComment({
   
   return (
     <div>
+       <div className="flex items-center gap-5 mb-2">
+       <h1>Want to share your thoughts?</h1>
       <button
-        className="border-2 border-black rounded-lg p-1 translate-y-[-10px]"
+        className="border-2 border-black rounded-md p-1 "
         onClick={showForm}
       >
-        Post Comment
+        Post a comment
       </button>
+      </div>
       {posted}
       {form ? (
         <form>
-          <label className= "mr-2" htmlFor="author">Author</label>
-          <input
-            id="username"
-            type="text"
-            placeholder="author name"
-            value={username}
-            onChange={(e) => {
-              setUsername(e.target.value);
-            }}
-          />
-
+           <h1>Signed in as: <span className="text-orange-500 ">tickle122</span></h1>
           <label className= "mr-2" htmlFor="body">Comment</label>
           <input
             id="body"
             type="text"
-            placeholder="enter comment"
+            placeholder=""
             value={body}
             onChange={(e) => setBody(e.target.value)}
+            className= "border-2 border-gray-500 rounded-sm mr-4"
           />
-
           <input className= "border-2 border-black rounded-md p-1 cursor-pointer" type="submit" onClick={handleSubmit} />
         </form>
       ) : null}

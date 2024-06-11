@@ -1,30 +1,36 @@
-
 import "./App.css";
+import {useState, useEffect} from "react"
+import { getAllArticles} from "../api";
+
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./components/Home";
 import SingleArticle from "./components/SingleArticle";
-import ArticleByTopic from "./components/ArticleByTopic";
+// import ArticleByTopic from "./components/ArticleByTopic";
 import ErrorPage from "./components/ErrorPage";
-import User from "./components/User";
+import SortArticlesByTopic from "./components/SortArticlesByTopic";
 
 function App() {
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getAllArticles().then((data) => {
+      setArticles(data);
+      setLoading(false);
+    });
+  }, []);
+
   return (
-    <div className="pl-5">
-      <div className="flex">
-        <div className="mr-[300px]">
-          <Header />
-        </div>
-        <div className="flex items-center mr-[100px]">
-          <User />
-        </div>
-      </div>
-      <Routes>
-        <Route path="*" element={<ErrorPage />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/article/:article_id" element={<SingleArticle />} />
-        <Route path="/article/topic/:topic" element={<ArticleByTopic />} />
-      </Routes>
+    <div className="pb-10 text-base sm:text-xl">
+        <Header />
+        <Routes>
+          <Route path="*" element={<ErrorPage />} />
+          <Route path="/" element={<Home articles={articles} setArticles={setArticles} loading={loading} setLoading={setLoading}/> } />
+          <Route path="/article/:article_id" element={<SingleArticle />} />
+          <Route path="/articles/topic/:topic" element={<SortArticlesByTopic articles={articles} setArticles={setArticles}/>} />
+          <Route path="/articles/topic/:topic/article/:article_id" element={<SingleArticle />} />
+        </Routes>
     </div>
   );
 }
