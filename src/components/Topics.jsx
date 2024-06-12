@@ -2,22 +2,19 @@ import { useSearchParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getTopics } from "../../api";
 
-
 function Topics() {
   const [topics, setTopics] = useState([]);
-  
 
   useEffect(() => {
     getTopics().then((data) => {
       setTopics(data);
-    })
+    });
   }, []);
 
-  
   return (
     <>
       <h1 className="mt-7 pb-3">View articles by topic:</h1>
-      <div className="flex gap-10">
+      <div className="sm:flex gap-10">
         {topics.map((topic) => {
           return (
             <div

@@ -1,9 +1,10 @@
 import { getSortedByTopic } from "../../api";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
-import TopicList from "./TopicList";
-import { FaUser } from "react-icons/fa";
+import { FaUser, FaComments, FaRegCalendarAlt } from "react-icons/fa";
+import { FcLike } from "react-icons/fc";
 import DeleteArticle from "./DeleteArticle";
+import Topics from "./Topics";
 
 function SortArticlesByTopic() {
   const [selectedSortBy, setSelectedSortBy] = useState(
@@ -16,7 +17,6 @@ function SortArticlesByTopic() {
 
   useEffect(() => {
     getSortedByTopic(topic, selectedSortBy, selectedOrderBy).then((data) => {
-      console.log(data);
       setArticlesByTopic(data);
     });
     const newParams = new URLSearchParams();
@@ -27,7 +27,7 @@ function SortArticlesByTopic() {
 
   return (
     <>
-      <div className="flex gap-[50px] pl-20">
+      <div className="flex flex-col gap-[6px] sm:flex sm:flex-row sm:gap-[50px]">
         <label htmlFor="sortby">
           Sort articles by:
           <select
@@ -63,8 +63,8 @@ function SortArticlesByTopic() {
           </select>
         </label>
       </div>
-      <TopicList/>
-      <Link to="/" className="ml-20 border-2 border-gray-500 rounded-sm p-1">
+      <Topics/>
+      <Link to="/" className="border-2 border-gray-500 rounded-sm p-1">
         Go back to home page
       </Link>
       <div className="flex flex-col items-center">
@@ -74,48 +74,54 @@ function SortArticlesByTopic() {
             : null}
         </h1>
         <ol>
-          {articlesByTopic.map((articleByTopic) => {
+          {articlesByTopic.map((articleByTopic, index) => {
             return (
-              <div key={articleByTopic.article_id}>
-                <li className={"pt-10 list-none max-w-[800px] max-h-[350px]"}>
+              <div key={articleByTopic.article_id} className="w-[100%] sm:w-[600px] mb-[50px]">
+                <li className={index===0 ? "mt-5 max-w-[800px]" : "max-w-[800px]"}>
                   <Link to={`article/${articleByTopic.article_id}`}>
                     <h2
-                      className={"text-lg justify-center font-bold flex mb-3"}
+                      className="text-lg font-bold flex justify-center sm:pb-4 flex-wrap"
                     >
                       {articleByTopic.title}
                     </h2>
-                    <div className="flex items-center">
+                    <div className="sm:flex sm:justify-center sm:items-center gap-8">
                       <img
                         src={articleByTopic.article_img_url}
                         alt="article image"
-                        className="max-w-[400px] max-h-[300px]"
-                      />
-                      <div className="flex flex-col gap-5 pl-5 pt-5">
-                        <div className="flex items-center gap-2">
-                          <div>
-                            <FaUser />
-                          </div>
-                          <p>{articleByTopic.author}</p>
-                        </div>
-                        <p>Topic: {articleByTopic.topic}</p>
-                        <p>{articleByTopic.votes} Likes</p>
-                        <p>{articleByTopic.comment_count} comments</p>
-                        <p>
-                          Posted on:{" "}
-                          {articleByTopic.created_at
-                            .slice(0, 19)
-                            .replace("T", " ")}
-                        </p>
-                      </div>
+                        className="min-w-[350px] max-w-[100%] sm:max-w-[400px] min-h-[250px] max-h-[300px]"
+                        />
+                      <div className="flex-col gap-2 sm:flex-col sm:gap-6 ">
+                  <div className="flex justify-between pr-2 sm:block">
+                  <div className="flex items-center gap-2 sm:pb-4">
+                    <div>
+                      <FaUser />
                     </div>
-                  </Link>
-                </li>
-                <DeleteArticle
-                  articles={articlesByTopic}
-                  setArticles={setArticlesByTopic}
-                  article={articleByTopic}
-                />
-              </div>
+                    <p>{articleByTopic.author}</p>
+                  </div>
+                  <div className="flex items-center content-center gap-3 sm:block">
+                  <p className="flex gap-1 items-center sm:pb-4">{articleByTopic.votes} <FcLike /></p>
+                  <p className="flex gap-2 items-center sm:pb-4">{articleByTopic.comment_count} <FaComments /></p>
+                  </div>
+                  </div>
+                  <div className="flex gap-8 sm:block">
+                  <p className="whitespace-nowrap sm:pb-4">Topic: {articleByTopic.topic}</p>
+                  <>
+                  <div className="whitespace-nowrap flex gap-3 items-center">
+                  <div>
+                  <FaRegCalendarAlt />
+                  </div>
+                  <p>
+                   {" "+((articleByTopic.created_at)[8]+(articleByTopic.created_at)[9]+"-"+(articleByTopic.created_at)[5]+(articleByTopic.created_at)[6]+"-"+(articleByTopic.created_at)[0]+(articleByTopic.created_at)[1]+(articleByTopic.created_at)[2]+(articleByTopic.created_at)[3]+" "+(articleByTopic.created_at)[11]+String(Number((articleByTopic.created_at)[12])+1)+(articleByTopic.created_at)[13]+(articleByTopic.created_at)[14]+(articleByTopic.created_at)[15])}
+                   </p>
+                  </div>
+                  </>
+                  </div>
+                  </div>
+                </div>
+              </Link>
+            </li>
+            <DeleteArticle articles={articlesByTopic} setArticles={setArticlesByTopic} article={articleByTopic} />
+            </div>
             );
           })}
         </ol>

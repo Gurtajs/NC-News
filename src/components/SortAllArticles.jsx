@@ -20,7 +20,7 @@ function SortArticles({ articles, setArticles }) {
 
   return (
     <>
-      <div className="flex gap-[50px]">
+      <div className="flex flex-col gap-[6px] sm:flex sm:flex-row sm:gap-[50px]">
         <label htmlFor="sortby">
           Sort articles by:
           <select

@@ -39,12 +39,10 @@ function Comments({ article_id, singleArticle }) {
     </>
   ) : (
     <>
-      <div className="mr-auto">
         <Vote singleArticle={singleArticle} article_id={article_id} />
-        <h1 className="translate-y-[-24px] translate-x-[70px]">
+        <h1 className="translate-y-[-28px] translate-x-[80px]">
           {commentCount} Comments
         </h1>
-        {showDeletedMessage ? <h1>Comment deleted...</h1> : null}
         <PostComment
           article_id={article_id}
           commentCount={commentCount}
@@ -53,14 +51,14 @@ function Comments({ article_id, singleArticle }) {
           setComments={setComments}
           comments={comments}
         />
-      </div>
+         {showDeletedMessage ? <h1>Deleting comment...</h1> : null}
       {comments.map((comment, index) => {
         return (
           <div
             className={index === 0 ? "pt-5" : "pt-10"}
             key={comment.comment_id}
           >
-            <div className="flex flex-col gap-2 p-2 max-w-5xl border-2 border-black border-solid rounded min-w-auto mr-2">
+            <div className="flex flex-col gap-2 p-2 max-w-5xl border-2 border-black border-solid rounded min-w-auto">
               <p className="font-bold">{comment.author}</p>
               <p>{comment.body}</p>
 

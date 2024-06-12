@@ -55,6 +55,7 @@ function PostComment({
         Post a comment
       </button>
       </div>
+      
       {posted}
       {form ? (
         <form>
@@ -68,7 +69,7 @@ function PostComment({
             onChange={(e) => setBody(e.target.value)}
             className= "border-2 border-gray-500 rounded-sm mr-4"
           />
-          <input className= "border-2 border-black rounded-md p-1 cursor-pointer" type="submit" onClick={handleSubmit} />
+          <input className= "border-2 border-black rounded-md p-1 cursor-pointer mt-2" type="submit" onClick={handleSubmit} />
         </form>
       ) : null}
      

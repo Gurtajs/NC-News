@@ -22,7 +22,7 @@ function App() {
   }, []);
 
   return (
-    <div className="pb-10 text-base sm:text-xl">
+    <div className="pb-10 text-xl pl-5 pr-5 sm:text-xl sm:pl-20 sm:pr-20">
         <Header />
         <Routes>
           <Route path="*" element={<ErrorPage />} />

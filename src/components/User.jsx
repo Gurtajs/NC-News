@@ -19,7 +19,7 @@ function User() {
   const filteredUser = users.filter((user) => user.username === "tickle122");
 
   return (
-    <div className="flex items-center text-base text-2xl sm:text-xl">
+    <div className="flex items-center text-base text-xl sm:text-xl">
       <h1 className="mr-1 ">User:</h1>
       <p className="text-orange-500"> {filteredUser[0].username}</p>
       <img className="border-2 border-2 border-gray-500 ml-2 mt-2 rounded-md"
