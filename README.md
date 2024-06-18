@@ -10,11 +10,12 @@ This news application combined the news back-end api (found at https://github.co
 - View all articles
 - View an article by id
 - View articles by topic
-- Post comments (a user is already logged in as default so they can only post comments with their username) to an article and delete comments (logged in user can only delete comments that they have posted.)
+- Post comments 
 - Like articles 
 - Order articles by ascending or descending sorting by date posted, number of comments or votes
-I have dealt with error handling when the user searches for a non-existing path, article or topic an appropriate error message is displayed. The form to post the comment is also validated ensuring that the user does not post bad data.
-- Delete articles
+- - Delete articles
+- I have dealt with error handling when the user searches for a non-existing path, article or topic an appropriate error message is displayed. The form to post the comment is also validated ensuring that the user does not post bad data.
+
 
 # Set up instructions
 
